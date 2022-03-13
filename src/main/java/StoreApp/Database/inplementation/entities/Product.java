@@ -6,9 +6,18 @@ public class Product {
     private Integer id;
     private String name;
     private Integer total;
+    private Integer totalCurrent;
     private Integer price;
 
     public Product() {
+    }
+
+    public Integer getTotalCurrent() {
+        return totalCurrent;
+    }
+
+    public void setTotalCurrent(Integer totalCurrent) {
+        this.totalCurrent = totalCurrent;
     }
 
     public Integer getId() {
@@ -48,12 +57,12 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(total, product.total) && Objects.equals(price, product.price);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(total, product.total) && Objects.equals(totalCurrent, product.totalCurrent) && Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, total, price);
+        return Objects.hash(id, name, total, totalCurrent, price);
     }
 
     @Override
@@ -62,6 +71,7 @@ public class Product {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", total=" + total +
+                ", totalCurrent=" + totalCurrent +
                 ", price=" + price +
                 '}';
     }

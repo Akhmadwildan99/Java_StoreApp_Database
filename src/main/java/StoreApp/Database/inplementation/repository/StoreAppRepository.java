@@ -1,5 +1,11 @@
 package StoreApp.Database.inplementation.repository;
 
-public interface StoreAppRepository {
+import StoreApp.Database.inplementation.entities.Product;
 
+import java.util.ArrayList;
+
+public interface StoreAppRepository {
+    ArrayList<Product> getAllProduct();
+    void productIn(Product product);
+    void checkOut();
 }
