@@ -35,39 +35,53 @@ public class RepositoryTest {
     @Test
     void testProductUpdate() throws SQLException {
         Product product = new Product();
-        product.setName("nescafe");
+        product.setName("kapalapi");
         product.setPrice(3000);
         product.setTotal(30);
         product.setTotalCurrent(30);
 
         storeAppRepository.productIn(product);
 
-//        String sql = "SELECT * FROM product WHERE name = ? AND price = ?";
-//        Connection connection = dataSource.getConnection();
-//        PreparedStatement statement = connection.prepareStatement(sql);
-//        statement.setString(1, product.getName());
-//        statement.setInt(2, product.getPrice());
-//        ResultSet resultSet = statement.executeQuery();
-//        Assertions.assertEquals("nescafe", resultSet.getString("name"));
-//        Assertions.assertEquals(80, resultSet.getInt("totalCurrent"));
+        String sql = "SELECT * FROM product WHERE name = ? AND price = ?";
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getPrice());
+        ResultSet resultSet = statement.executeQuery();
+        Product productQuery = new Product();
+        if(resultSet.next()){
+            var name = resultSet.getString("name");
+            var totalCurrent = resultSet.getInt("totalCurrent");
+            productQuery.setName(name);
+            productQuery.setTotalCurrent(totalCurrent);
+        }
+        Assertions.assertEquals("kapalapi", productQuery.getName());
+        Assertions.assertEquals(60, productQuery.getTotalCurrent());
     }
 
     @Test
     void testProductIn() throws SQLException {
         Product product = new Product();
-        product.setName("kopi luwak");
+        product.setName("kopi gayo");
         product.setPrice(3000);
-        product.setTotal(100);
+        product.setTotal(80);
 
         storeAppRepository.productIn(product);
 
-//        String sql = "SELECT * FROM product WHERE name = ? AND price = ?";
-//        Connection connection = dataSource.getConnection();
-//        PreparedStatement statement = connection.prepareStatement(sql);
-//        statement.setString(1, product.getName());
-//        statement.setInt(2, product.getPrice());
-//        ResultSet resultSet = statement.executeQuery();
-//        Assertions.assertEquals(100, resultSet.getString("total"));
-//        Assertions.assertEquals(100, resultSet.getInt("totalCurrent"));
+        String sql = "SELECT * FROM product WHERE name = ? AND price = ?";
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, product.getName());
+        statement.setInt(2, product.getPrice());
+        ResultSet resultSet = statement.executeQuery();
+        Product productQuery = new Product();
+        if(resultSet.next()){
+            var total = resultSet.getInt("total");
+            var totalCurrent = resultSet.getInt("totalCurrent");
+            productQuery.setTotal(total);
+            productQuery.setTotalCurrent(totalCurrent);
+        }
+        Assertions.assertEquals(80, productQuery.getTotal());
+        Assertions.assertEquals(80, productQuery.getTotalCurrent());
     }
 }
